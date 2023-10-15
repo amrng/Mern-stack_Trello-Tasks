@@ -1,0 +1,7 @@
+.navbar {
+    background-color: transparent !important;
+}
+
+.text-color{
+    color: var(--main-text-color)
+}

@@ -8,12 +8,12 @@ import Footer from '../Footer/Footer'
 
 
 export default function Layout() {
-    
+
   return (
     <>
-    <Navbar/>
-    <Outlet/>
-    <Footer/>
+      <Navbar />
+      <Outlet />
+      <Footer />
     </>
   )
 }
