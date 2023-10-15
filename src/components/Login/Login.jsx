@@ -1,7 +1,7 @@
 
 import React from 'react'
 // eslint-disable-next-line no-unused-vars
-import style from "Login.css"
+import style from "./Login.css"
 
 
 export default function Login() {

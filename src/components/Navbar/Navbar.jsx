@@ -1,12 +1,12 @@
 
 import React from 'react'
 // eslint-disable-next-line no-unused-vars
-import style from "./Tasks.css"
+import style from "./Navbar.css"
 
 
-export default function Tasks() {
+export default function Navbar() {
     
   return (
-    <div>Tasks</div>
+    <div>Navbar</div>
   )
 }

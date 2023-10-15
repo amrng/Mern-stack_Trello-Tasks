@@ -1,12 +1,12 @@
 
 import React from 'react'
 // eslint-disable-next-line no-unused-vars
-import style from "./Tasks.css"
+import style from "./Footer.css"
 
 
-export default function Tasks() {
+export default function Footer() {
     
   return (
-    <div>Tasks</div>
+    <div>Footer</div>
   )
 }

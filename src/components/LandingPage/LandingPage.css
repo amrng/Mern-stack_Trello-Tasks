@@ -1,0 +1,17 @@
+.whole {
+    background-color: rgb(8 51 68) !important;
+    color: rgb(251 191 36) !important;
+    margin: 30px !important;
+}
+
+.buttons {
+    background-color: rgb(251 191 36) !important;
+    border: none !important;
+    color: rgb(8 51 68);
+}
+
+.buttons:hover {
+    background-color: rgb(245 158 11) !important;
+    border: none !important;
+    color: rgb(8 51 68);
+}
