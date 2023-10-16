@@ -1,0 +1,11 @@
+.network {
+    z-index: 9999 !important;
+    color: white !important;
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    height: 25vh;
+    border: 2px dotted rgb(245, 158, 11);
+    background-color: rgb(6, 35, 46);
+    border-radius: 25px;
+}
