@@ -1,7 +1,13 @@
 .navbar {
-    background-color: transparent !important;
+    background-color: rgb(6, 35, 46) !important;
+    box-shadow: 0 3px 10px 0 rgb(245, 158, 11);
+    border-radius: 0 0 15px 15px;
 }
 
-.text-color{
+.text-color {
     color: var(--main-text-color)
+}
+
+.nav-link:hover {
+    color: white !important;
 }

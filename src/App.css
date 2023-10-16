@@ -1,6 +1,6 @@
-:root{
-  --background-color: #083344;
-  --main-text-color: #F59E0B;
+:root {
+  --background-color: rgb(8, 51, 68);
+  --main-text-color: rgb(245, 158, 11);
 }
 
 body {

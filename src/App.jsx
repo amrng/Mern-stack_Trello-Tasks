@@ -7,6 +7,7 @@ import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import Tasks from './components/Tasks/Tasks'
 import NotFound from './components/NotFound/NotFound'
+import Profile from './components/Profile/Profile'
 
 
 
@@ -19,6 +20,7 @@ const routers = createBrowserRouter([
     {path: "login", element: <Login/>},
     {path: "register", element: <Register/>},
     {path: "tasks", element: <Tasks/>},
+    {path: "profile", element: <Profile/>},
     {path: "*", element: <NotFound/>}
   ]}
 ])
@@ -36,15 +38,6 @@ const routers = createBrowserRouter([
       <Layout/>
 
     </RouterProvider>
-
-
-
-
-
-
-
-
-
 
 
   )
