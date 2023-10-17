@@ -17,7 +17,7 @@ export default function LandingPage() {
     <>
       <div className="container text-white ">
 
-    <div className="row text-center align-items-center mx-auto py-5 bg-info bg-opacity-10 rounded-5">
+    <div className="row text-center align-items-center mx-auto py-5 bg-info bg-gradient  bg-opacity-10 rounded-5">
       <div className="col-md-5">
         <img src={img3} className='w-100' alt="" />
       </div>

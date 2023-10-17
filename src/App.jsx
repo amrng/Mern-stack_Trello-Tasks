@@ -14,6 +14,7 @@ import AddTask from './components/Tasks/AddTask/AddTask'
 import AllTasks from './components/Tasks/AllTasks/AllTasks'
 import UpdateTask from './components/Tasks/UpdateTask/UpdateTask'
 import DelayedTasks from './components/Tasks/DelayedTasks/DelayedTasks'
+import NotFoundToUpdate from './components/Tasks/NotFoundToUpdate/NotFoundToUpdate'
 
 
 
@@ -29,8 +30,9 @@ const routers = createBrowserRouter([
     {path: "tasks", element: <Tasks/>, children: [
       {path: "add", element: <AddTask/>},
       {path: "all", element: <AllTasks/>},
-      {path: "update", element: <UpdateTask/>},
-      {path: "delayed", element: <DelayedTasks/>}
+      {path: "update/:id", element: <UpdateTask/>},
+      {path: "delayed", element: <DelayedTasks/>},
+      {path: "update", element: <NotFoundToUpdate/>}
     ]},
     {path: "profile", element: <Profile/>},
     {path: "*", element: <NotFound/>}
