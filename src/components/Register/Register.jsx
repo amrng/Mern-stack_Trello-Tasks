@@ -1,6 +1,6 @@
 
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 
@@ -8,23 +8,28 @@ import axios from 'axios';
 
 export default function Register() {
 
-  const { control, handleSubmit, formState: { errors, isSubmitting, dirtyFields }, register } = useForm();
-
+  const [isLoading, setisloading] = useState(false);
+  const { control, handleSubmit, formState: { errors, dirtyFields }, register } = useForm();
+  const apiUrl = 'https://trello-application.onrender.com/signup';
+  let navigate = useNavigate()
   const onSubmit = async (data) => {
-    try {
-      // Replace 'your-api-endpoint' with the actual API endpoint you want to send data to
-      const apiUrl = 'https://trello-application.onrender.com/signup'; // Replace with your API URL
+    setisloading(true)
+    await axios.post(apiUrl, data).then((res) => {
+      console.log(res);
+      if (res.data.message === "Successfully signed up") {
+        console.log("HIIII");
+        navigate('/login')
+        setisloading(false)
+      } else {
+        setisloading(false)
+        console.log("7ot isLoading b false");
+      }
+    }).catch((err) => {
+      setisloading(false)
+      console.log(err);
+    });
 
-      // Send a POST request to the API with form data
-      const response = await axios.post(apiUrl, data);
-      console.log(response);
 
-      // Handle the API response, e.g., show a success message or redirect the user
-      console.log('API response:', response.data);
-    } catch (error) {
-      // Handle errors, e.g., show an error message
-      console.error('API error:', error);
-    }
   };
 
   return <>
@@ -36,7 +41,7 @@ export default function Register() {
               <div className="card mx-auto py-5 bg-info bg-opacity-10 rounded-5">
                 <div className="card-body p-5">
                   <h2 className="text-uppercase text-center mb-5 text-white">Create an account</h2>
-                  <form className='' onSubmit={handleSubmit(onSubmit)}>
+                  <form className='' onSubmit={handleSubmit((data) => onSubmit(data))}>
                     <div className="form-outline mb-4">
                       <Controller
                         name="email"
@@ -107,10 +112,11 @@ export default function Register() {
                           <div>
                             <input
                               {...field}
-                              type="password"
-                              id="password"
+                              type="text"
+                              id="userName"
                               className="form-control form-control-lg"
                               placeholder='User Name'
+                              name='userName'
                             />
                             {dirtyFields.password && !field.value && (
                               <p className="text-danger">User Name is required</p>
@@ -138,8 +144,11 @@ export default function Register() {
                     <div className="d-flex justify-content-center">
                       <button
                         type="submit"
-                        className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                        className="btn btn-outline-info btn-lg gradient-custom-4 text-body"
                       >
+                        {isLoading ? (
+                          <i className="fa-solid fa-spinner fa-spin-pulse text-white me-2"></i>
+                        ) : ""}
                         Register
                       </button>
                     </div>
