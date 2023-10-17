@@ -7,6 +7,6 @@ import style from "./NotFoundToUpdate.css"
 export default function NotFoundToUpdate() {
     
   return (
-    <div><h1>Select Task To Update 😊</h1></div>
+    <div className='w-100 h-100 d-flex '><h1 className='mx-auto my-auto '>Select Task To Update 😊</h1></div>
   )
 }

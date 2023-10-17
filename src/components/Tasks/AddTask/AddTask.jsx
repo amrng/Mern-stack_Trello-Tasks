@@ -2,15 +2,23 @@
 import React from 'react'
 // eslint-disable-next-line no-unused-vars
 import style from "./AddTask.css"
-import { useFormik, validateYupSchema } from 'formik'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { addTask } from '../../Redux/taskaSlice'
 
 
 export default function AddTask() {
 
-  let validateYupSchema = Yup.object({
-    title: Yup.string(),
-    description: Yup.string().max(300, "Maximmum 300 Char")
+  let dispatch = useDispatch()
+
+
+
+  let validationSchema = Yup.object({
+    title: Yup.string().required("Title is required"),
+    description: Yup.string().required("What is the description of this task"),
+    assignTo: Yup.string().email("Email not valid").required("Who will done this job"),
+    deadline: Yup.date().required('DeadLine is required')
   })
     
     let formik = useFormik({
@@ -18,11 +26,12 @@ export default function AddTask() {
         title:"",
         description: "",
         assignTo:"",
-        deadLine:""
+        deadline: ""
       },
-      validateYupSchema,
+      validationSchema,
       onSubmit: (values)=>{
         console.log(values);
+        dispatch(addTask(values))
       }
     })
 
@@ -31,43 +40,56 @@ export default function AddTask() {
   return (
     <div className='h-100 position-relative '>
     
-    <div className='w-50 mx-auto '>
-      <div className="alert alert-danger py-0 px-3 mb-1"><p>sadsamdaslknfksnfknasfknaskfnalkfn</p></div>
-      <div className="alert alert-danger py-0 px-3 mb-1"><p>sadsamdaslknfksnfknasfknaskfnalkfn</p></div>
-      <div className="alert alert-danger py-0 px-3 mb-1"><p>sadsamdaslknfksnfknasfknaskfnalkfn</p></div>
-      <div className="alert alert-danger py-0 px-3 mb-1"><p>sadsamdaslknfksnfknasfknaskfnalkfn</p></div>
-    </div>
 
 
     <form onSubmit={formik.handleSubmit}>
-      <div className="form-group">
+    <div className='w-50 mx-auto '>
+    
+    {formik.errors.title && formik.touched.title ?
+    <div className="alert alert-danger py-2 px-3 mb-1"><h6>Error: 
+      <span className='fw-light text-danger-emphasis'>{formik.errors.title}</span></h6></div>
+    : ""}
+    {formik.errors.description && formik.touched.description ?
+    <div className="alert alert-danger py-2 px-3 mb-1"><h6>Error: 
+      <span className='fw-light text-danger-emphasis'>{formik.errors.description}</span></h6></div>
+    : ""}
+    {formik.errors.assignTo && formik.touched.assignTo ?
+    <div className="alert alert-danger py-2 px-3 mb-1"><h6>Error: 
+      <span className='fw-light text-danger-emphasis'>{formik.errors.assignTo}</span></h6></div>
+    : ""}
+    {formik.errors.deadline && formik.touched.deadline ?
+    <div className="alert alert-danger py-2 px-3 mb-1"><h6>Error:
+      <span className='fw-light text-danger-emphasis'>{formik.errors.deadline}</span></h6></div>
+    : ""}
+    </div>
+      <div className="row justify-content-center mb-5">
+        <div className="form-group col-md-3 me-3 my-4">
+          <input type="text" className='form-control bg-dark-subtle bg-opacity-10'
+          name='title' id='title' placeholder='Task Title'
+          onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.title}/>
+        </div>
 
-        <div className="row justify-content-center mb-5">
-        <div className="col-md-3 me-3 my-4">
-          <input type="text" className='form-control bg-dark-subtle bg-opacity-10' name='title' placeholder='Task Title'
-                onChange={formik.handleBlur} onBlur={formik.handleBlur} value={formik.values.title}/>
+        <div className="form-group col-md-3 me-3 my-4">
+          <input type="text" className='form-control bg-dark-subtle bg-opacity-10'
+          name='assignTo' placeholder='Task for who?'
+          onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.assignTo}/>
         </div>
-        <div className="col-md-3 me-3 my-4">
-          <input type="text" className='form-control bg-dark-subtle bg-opacity-10' name='assignTo' placeholder='Task for who?'
-                onChange={formik.handleBlur} onBlur={formik.handleBlur} value={formik.values.assignTo}/>
+
+        <div className="form-group col-md-3 my-4">
+          <input type="date" className='form-control bg-dark-subtle bg-opacity-10'
+          name='deadline' id='deadline'
+          onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.deadline}/>
         </div>
-        <div className="col-md-3 my-4">
-          <input type="date" className='form-control bg-dark-subtle bg-opacity-10' name='deadLine' placeholder='Task for who?'
-                onChange={formik.handleBlur} onBlur={formik.handleBlur} value={formik.values.deadLine}/>
-        </div>
-        <div className="col-md-10">
-      <textarea onChange={formik.handleChange} value={formik.values.description}
+
+        <div className="form-group col-md-10">
+      <textarea onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.description}
         className="form-control bg-dark-subtle bg-opacity-25 col-md-10" name="description"
             rows={7} placeholder="Description of task"/>
         </div>
-        </div>
-      
+      </div>
 
-      <div className="d-flex justify-content-center btndiv">
-      <button type="submit" className='btn btn-outline-info me-5'><i class="fa-regular fa-paper-plane me-2"></i>Submit</button>
-      <button type="reset" className='btn btn-outline-info '><i class="fa-solid fa-eraser me-2"></i>Reset</button>
-      </div>
-      </div>
+      <button type="submit" className='btn btndiv mx-auto w-25 btn-outline-info'><i className="fa-regular fa-paper-plane me-2"></i>Submit</button>
+
     </form>
     
     

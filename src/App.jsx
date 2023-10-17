@@ -28,7 +28,7 @@ const routers = createBrowserRouter([
     {path: "login", element: <Login/>},
     {path: "register", element: <Register/>},
     {path: "tasks", element: <Tasks/>, children: [
-      {path: "add", element: <AddTask/>},
+      {path: "add/:id", element: <AddTask/>},
       {path: "all", element: <AllTasks/>},
       {path: "update/:id", element: <UpdateTask/>},
       {path: "delayed", element: <DelayedTasks/>},

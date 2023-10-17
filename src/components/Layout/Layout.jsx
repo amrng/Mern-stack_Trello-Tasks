@@ -5,6 +5,8 @@ import style from "./Layout.css"
 import { Offline } from "react-detect-offline";
 import Navbar from '../Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 export default function Layout() {
@@ -12,6 +14,7 @@ export default function Layout() {
   return (
     <>
       <Navbar />
+      <Toaster/>
       <Offline>
         <div className='network w-25 p-4 text-danger d-flex flex-column align-items-center justify-content-center '>
           <i className="fa-solid fa-triangle-exclamation fa-2xl fa-fade mb-4"></i>
