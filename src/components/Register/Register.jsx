@@ -1,17 +1,31 @@
 
 import React from 'react'
-import style from "./Register.css"
 import { Link } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+
+
 
 export default function Register() {
 
   const { control, handleSubmit, formState: { errors, isSubmitting, dirtyFields }, register } = useForm();
 
+  const onSubmit = async (data) => {
+    try {
+      // Replace 'your-api-endpoint' with the actual API endpoint you want to send data to
+      const apiUrl = 'https://trello-application.onrender.com/signup'; // Replace with your API URL
 
-  const onSubmit = (data) => {
-    console.log(data);
-  }
+      // Send a POST request to the API with form data
+      const response = await axios.post(apiUrl, data);
+      console.log(response);
+
+      // Handle the API response, e.g., show a success message or redirect the user
+      console.log('API response:', response.data);
+    } catch (error) {
+      // Handle errors, e.g., show an error message
+      console.error('API error:', error);
+    }
+  };
 
   return <>
     <section>ء
@@ -29,11 +43,7 @@ export default function Register() {
                         control={control}
                         defaultValue=""
                         rules={{
-                          required: 'Email is required',
-                          pattern: {
-                            value: /^\S+@\S+\.\S+$/,
-                            message: 'Invalid email format',
-                          },
+                          required: 'Email is required'
                         }}
                         render={({ field }) => (
                           <div>
@@ -60,7 +70,7 @@ export default function Register() {
                         rules={{
                           required: 'Password is required',
                           pattern: {
-                            value: /^\S+@\S+\.\S+$/,
+                            value: /^[A-Z][a-z0-9]{5,10}$/,
                             message: 'Invalid Password format',
                           },
                         }}
@@ -89,7 +99,7 @@ export default function Register() {
                         rules={{
                           required: 'User Name is required',
                           pattern: {
-                            value: /^\S+@\S+\.\S+$/,
+                            value: /^(?=[a-zA-Z0-9]{3,15}$)[a-zA-Z0-9]*$/,
                             message: 'Invalid User Name format',
                           },
                         }}
@@ -129,7 +139,6 @@ export default function Register() {
                       <button
                         type="submit"
                         className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                        disabled={!!errors.email}
                       >
                         Register
                       </button>
