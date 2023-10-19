@@ -1,0 +1,16 @@
+.order {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--main-text-color);
+    transition: 0.3s;
+}
+
+.order:hover {
+    background-color: rgb(38, 52, 68) !important;
+    transition: 0.3s;
+}
+
+.order:focus {
+    background-color: rgb(38, 52, 68) !important;
+    transition: 0.3s;
+}

@@ -1,12 +1,16 @@
-
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 
 
-
 export default function Register() {
+	const {
+		control,
+		handleSubmit,
+		formState: { errors, isSubmitting, dirtyFields },
+		register,
+	} = useForm();
 
   const [isLoading, setisloading] = useState(false);
   const { control, handleSubmit, formState: { errors, dirtyFields }, register } = useForm();
@@ -33,7 +37,7 @@ export default function Register() {
   };
 
   return <>
-    <section>ء
+    <section>
       <div className="mask d-flex align-items-center h-100 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -162,5 +166,28 @@ export default function Register() {
       </div>
     </section>
 
-  </>
+											<div className="d-flex justify-content-center">
+												<button
+													type="submit"
+													className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+													disabled={!!errors.email}>
+													Register
+												</button>
+											</div>
+											<p className="text-center text-muted mt-5 mb-0">
+												Have already an account?{' '}
+												<Link to="/login" className="fw-bold text-body">
+													<u>Login here</u>
+												</Link>
+											</p>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</>
+	);
 }
