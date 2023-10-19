@@ -8,14 +8,14 @@ export default function Navbar() {
 	let { token, setToken } = useContext(TokenContext);
 	let navigate = useNavigate();
 	function logout() {
-		localStorage.removeItem('userToken');
+		localStorage.removeItem('token');
 		setToken(null);
 		navigate('/login');
 	}
 
 	return (
 		<>
-			<nav className="navbar navbar-expand-lg w-50 mx-auto  bg-danger mb-5 ">
+			<nav className="navbar navbar-expand-lg w-50 mx-auto fs-5  bg-danger mb-5 ">
 				<div className="container-fluid px-4 ">
 					<Link to="/" className="navbar-brand text-white">
 						<span className="text-color">T</span>rello
@@ -38,7 +38,7 @@ export default function Navbar() {
 										<Link
 											to="/profile"
 											className="nav-link text-color"
-											aria-current="page">
+											>
 											Profile
 										</Link>
 									</li>
@@ -46,14 +46,15 @@ export default function Navbar() {
 										<Link
 											to="/tasks"
 											className="nav-link text-color"
-											aria-current="page">
+											
+											>
 											Tasks
 										</Link>
 									</li>
 									<li className="nav-item">
 										<button
-											className="nav-link"
-											style={{ backgroundColor: 'white' }}
+											className="nav-link text-color"
+											
 											onClick={logout}>
 											Logout
 										</button>
@@ -62,7 +63,8 @@ export default function Navbar() {
 							) : (
 								<>
 									<li className="nav-item">
-										<Link to="/register" className="nav-link text-color">
+										<Link to="/register" className="nav-link text-color"
+										>
 											Register
 										</Link>
 									</li>

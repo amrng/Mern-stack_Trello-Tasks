@@ -5,7 +5,7 @@ import style from "./Layout.css"
 import { Offline } from "react-detect-offline";
 import Navbar from '../Navbar/Navbar'
 import { Outlet } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 
 

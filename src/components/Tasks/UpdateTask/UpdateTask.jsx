@@ -57,15 +57,34 @@ export default function UpdateTask() {
         {allTasks?.tasks?.filter((task) => task._id === selectedTask.id).map(task =>
         <div key={task._id} className="col-md-10 bg-info bg-opacity-10 rounded-5 position-relative mb-4 p-3">
           <h3 className='text-center mb-3 text-color'>{task.title}</h3>
-          <div className='d-flex justify-content-between mb-3'>
-            <h6 className='d-inline-block text-color fs-5 me-3'>Assigned to: <span className='fw-normal text-white fs-6 '>{task.userId.userName}</span></h6>
+
+          <div className='row mb-2 justify-content-center '>
+            <div className="col-md-5 me-4">
+            <h6 className='d-inline-block text-color fs-5 me-3'>Assigned to: <span className='fw-normal text-white fs-6 '>{task.assignTo.userName}</span></h6>
+            </div>
+            <div className="col-md-5">
             <h6 className='d-inline-block text-color fs-5 me-3'>Status: <span className='fw-normal text-white fs-6 '>{task.status}</span></h6>
+            </div>
           </div>
-            <h6 className='d-inline-block text-color fs-5 mb-3  me-3'>Description: <span className='fw-normal text-white fs-6 '>{task.description}</span></h6>
-            {task.deadline? 
-            <h6 className='text-color fs-5 mb-4  me-3'>Deadline: <span className='fw-normal text-white fs-6 '>{task.deadline}</span></h6>
-            : ""}
-            <button onClick={()=> removeTask(task._id)} className='btn btn-outline-danger mx-auto  py-1 d-block'>Delete</button>
+
+          <div className='row mb-2 justify-content-center '>
+            <div className="col-md-5 me-4">
+            <h6 className='d-inline-block text-color fs-5 me-3'>Description: <span className='fw-normal text-white fs-6 '>{task.description}</span></h6>
+            </div>
+            <div className="col-md-5">
+            <h6 className='d-inline-block text-color fs-5 me-3'>Email: <span className='fw-normal text-white fs-6 '>{task.assignTo.email}</span></h6>
+            </div>
+          </div>
+
+          <div className='row mb-2 justify-content-center '>
+            <div className="col-md-5 me-4">
+            <h6 className='d-inline-block text-color fs-5 me-3'>Deadline: <span className='fw-normal text-white fs-6 '>{task.deadline}</span></h6>
+            </div>
+            <div className="col-md-5">
+            <h6 className='d-inline-block text-color fs-5 me-3'>userId: <span className='fw-normal text-white fs-6 '>{task.assignTo._id}</span></h6>
+            </div>
+          </div>
+            <button onClick={()=> removeTask(task._id)} className='btn btn-outline-danger mx-auto mt-3 py-1 d-block'>Delete</button>
         </div>)}
       </div>
 

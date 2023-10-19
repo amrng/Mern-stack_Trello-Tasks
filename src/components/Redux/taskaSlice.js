@@ -4,13 +4,17 @@ import jwtDecode from "jwt-decode";
 import toast from "react-hot-toast";
 
 const baseUrl = "https://trello-application.onrender.com/task";
-let decoded = jwtDecode(localStorage.getItem("token"));
+// let jwtDecode(localStorage.getItem("token")) = jwtDecode(localStorage.getItem("token"));
 
 export const addTask = createAsyncThunk("Tasks/addTask", async (values) => {
   await axios
-    .post(`${baseUrl}/addTask/${decoded.id}`, values, {
-      headers: { token: localStorage.getItem("token") },
-    })
+    .post(
+      `${baseUrl}/addTask/${jwtDecode(localStorage.getItem("token")).id}`,
+      values,
+      {
+        headers: { token: localStorage.getItem("token") },
+      }
+    )
     .then((res) => {
       toast.success(res.data.message, {
         duration: 6000,

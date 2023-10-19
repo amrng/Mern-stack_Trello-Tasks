@@ -5,14 +5,14 @@ import './Tasks.css'
 
 export default function Tasks() {
   
-  let decode = jwtDecode(localStorage.getItem("token"))
+  
     
   return (
     <div className="my-5 pt-5 overflow-x-hidden">
       <div className="row justify-content-center align-items-start ">
 
         <div className="col-md-2 p-0 rounded-5 d-flex flex-column align-items-center justify-content-center">
-          <Link to={`add/${decode.id}`} className="order bg-info bg-opacity-10 px-4 py-5 rounded-top-5 w-100">
+          <Link to={`add/${jwtDecode(localStorage.getItem("token")).id}`} className="order bg-info bg-opacity-10 px-4 py-5 rounded-top-5 w-100">
             <h5 className='mb-0'><i className="fa-regular fa-square-plus fa-lg me-3"></i>Add Task</h5>
             
           </Link>

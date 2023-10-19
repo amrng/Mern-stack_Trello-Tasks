@@ -8,8 +8,6 @@ import Register from './components/Register/Register'
 import Tasks from './components/Tasks/Tasks'
 import NotFound from './components/NotFound/NotFound'
 import Profile from './components/Profile/Profile'
-import { Provider } from 'react-redux'
-import { store } from './components/Redux/Store'
 import AddTask from './components/Tasks/AddTask/AddTask'
 import AllTasks from './components/Tasks/AllTasks/AllTasks'
 import UpdateTask from './components/Tasks/UpdateTask/UpdateTask'
@@ -21,8 +19,8 @@ import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 export default function App() {
   	let { setToken } = useContext(TokenContext);
 	useEffect(() => {
-		if (localStorage.getItem('userToken')) {
-			setToken(localStorage.getItem('userToken'));
+		if (localStorage.getItem('token')) {
+			setToken(localStorage.getItem('token'));
 		}
 	}, [setToken]);
 
@@ -33,7 +31,7 @@ const routers = createBrowserRouter([
     {path: "register", element: <Register/>},
     {path: 'tasks', element: (<ProtectedRoutes> <Tasks /> </ProtectedRoutes>), children: [
       {path: "add/:id", element: <AddTask/>},
-      {index: "true", element: <AllTasks/>},
+      {path: "all", element: <AllTasks/>},
       {path: "update/:id", element: <UpdateTask/>},
       {path: "delayed", element: <DelayedTasks/>},
     ]},
@@ -43,10 +41,10 @@ const routers = createBrowserRouter([
 ])
 
 return (
-    <Provider store={store}>
+
     <RouterProvider router={routers}>
       <Layout/>
     </RouterProvider>
-    </Provider>
+
   )
 }

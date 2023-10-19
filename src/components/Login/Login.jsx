@@ -34,7 +34,7 @@ export default function Login() {
 			.then((data) => {
 				if (data.data.message === 'Successfully signed in, Welcome back') {
 					setIsLoading(false);
-					localStorage.setItem('userToken', data.data.token);
+					localStorage.setItem('token', data.data.token);
 					setToken(data.data.token);
 					navigate('/tasks');
 				}
@@ -64,7 +64,7 @@ export default function Login() {
 		const token = searchParams.get('token');
 		console.log('Received token:', token);
 		if (token) {
-			localStorage.setItem('userToken', token); // Store the token in local storage
+			localStorage.setItem('token', token); // Store the token in local storage
 			setToken(token); // Set the token in your TokenContext or state if needed
 			navigate('/tasks', { replace: true }); // Navigate to the '/tasks' route
 		}
