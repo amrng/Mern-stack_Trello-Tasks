@@ -1,14 +1,10 @@
-
 import React from 'react'
-// eslint-disable-next-line no-unused-vars
-import style from "./LandingPage.css"
 import img1 from "../../assets/landing.png"
 import img2 from "../../assets/landing2.png"
 import img3 from "../../assets/TrelloUICollage_4x.webp"
 import int from "../../assets/Integrations.svg"
 import gea from "../../assets/Gears.svg"
 import ser from "../../assets/Search_Value.svg"
-// import img3 from "../../assets/landing3.png"
 
 
 export default function LandingPage() {
@@ -53,7 +49,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="row py-5 justify-content-evenly ">
+      <div className="row py-5 mb-4  justify-content-evenly ">
           <div className="col-md-3 bg-info bg-opacity-10 rounded-5 p-4">
             <div className='py-2'><img src={int} alt="" /></div>
             <div className='py-1'><h5>Integrations</h5></div>
@@ -70,16 +66,6 @@ export default function LandingPage() {
             <div className='py-3'><p>The productivity tool teams love, paired with the features and security needed for scale.</p></div>
           </div>
       </div>
-
-
-
-      <div className="row py-5 text-center">
-          <h1>Hn3ml footer hena</h1>
-      </div>
-
-
-
-
       </div>
     </>
   )

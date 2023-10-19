@@ -5,30 +5,26 @@ import toast from "react-hot-toast";
 
 const baseUrl = "https://trello-application.onrender.com/task";
 let decoded = jwtDecode(localStorage.getItem("token"));
-console.log("Decoded token", decoded);
 
 export const addTask = createAsyncThunk("Tasks/addTask", async (values) => {
   await axios
-    .post(
-      `${baseUrl}/addTask/${decoded.id}`,
-      { values },
-      { headers: { token: localStorage.getItem("token") } }
-    )
+    .post(`${baseUrl}/addTask/${decoded.id}`, values, {
+      headers: { token: localStorage.getItem("token") },
+    })
     .then((res) => {
-      console.log(res);
-      toast.success(res.response.data.message, {
-        duration: 4000,
+      toast.success(res.data.message, {
+        duration: 6000,
         position: "bottom-right",
         style: {
           border: "2px solid rgb(245, 158, 11)",
           margin: "0 30px 30px 0",
         },
-        icon: <i class="fa-solid fa-circle-check text-success"></i>,
+        icon: <i className="fa-solid fa-circle-check text-success"></i>,
       });
     })
     .catch((err) => {
       toast.error(err.response.data.message, {
-        duration: 4000,
+        duration: 6000,
         position: "bottom-right",
         style: {
           border: "2px solid rgb(245, 158, 11)",
@@ -36,72 +32,121 @@ export const addTask = createAsyncThunk("Tasks/addTask", async (values) => {
         },
         icon: <i className="fa-solid fa-circle-exclamation text-danger "></i>,
       });
-      console.log(err);
     });
 });
 
-// export const updateTask = createAsyncThunk(
-//   "Tasks/updateTask",
-//   async ({ taskContent }) => {
-//     const response = await axios.patch(
-//       `${baseUrl}/updateTask/${decoded.id}`,
-//       { taskContent },
-//       { headers: localStorage.getItem("token") }
-//     );
-//     console.log(response);
-//   }
-// );
+export const updateTask = createAsyncThunk(
+  "Tasks/updateTask",
+  async ({ paramID, values }) => {
+    await axios
+      .patch(`${baseUrl}/updateTask/${paramID}`, values, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        toast.success(res.data.message, {
+          duration: 6000,
+          position: "bottom-right",
+          style: {
+            border: "2px solid rgb(245, 158, 11)",
+            margin: "0 30px 30px 0",
+          },
+          icon: <i className="fa-solid fa-circle-check text-success"></i>,
+        });
+      })
+      .catch((err) =>
+        toast.error(err.response.data.message, {
+          duration: 6000,
+          position: "bottom-right",
+          style: {
+            border: "2px solid rgb(245, 158, 11)",
+            margin: "0 30px 30px 0",
+          },
+          icon: <i className="fa-solid fa-circle-exclamation text-danger "></i>,
+        })
+      );
+  }
+);
 
-// export const deleteTask = createAsyncThunk(
-//   "Tasks/deleteTask",
-//   async ({ taskContent }) => {
-//     const response = await axios.delete(
-//       `${baseUrl}/updateTask/${decoded.id}`,
-//       { taskContent },
-//       { headers: localStorage.getItem("token") }
-//     );
-//     console.log(response);
-//   }
-// );
+export const deleteTask = createAsyncThunk(
+  "Tasks/deleteTask",
+  async (paramID) => {
+    await axios
+      .delete(`${baseUrl}/updateTask/${paramID}`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        toast.success(res.data.message, {
+          duration: 6000,
+          position: "bottom-right",
+          style: {
+            border: "2px solid rgb(245, 158, 11)",
+            margin: "0 30px 30px 0",
+          },
+          icon: <i className="fa-solid fa-circle-check text-success"></i>,
+        });
+      })
+      .catch((err) =>
+        toast.error(err.response.data.message, {
+          duration: 6000,
+          position: "bottom-right",
+          style: {
+            border: "2px solid rgb(245, 158, 11)",
+            margin: "0 30px 30px 0",
+          },
+          icon: <i className="fa-solid fa-circle-exclamation text-danger "></i>,
+        })
+      );
+  }
+);
 
 export const getAllTasks = createAsyncThunk("Tasks/getAllTasks", async () => {
   const response = await axios.get(`${baseUrl}/getAllTasksWithUsersData`, {
     headers: { token: localStorage.getItem("token") },
   });
-  return response.data.getAllTasksWithUsersData;
+  return response.data.tasks;
 });
 
-// export const getDelayedTasks = createAsyncThunk("Tasks/getTasks", async () => {
-//   const response = await axios.get(
-//     `${baseUrl}/getAllTasksWithUsersData/${decoded.id}`,
-//     { headers: localStorage.getItem("token") }
-//   );
-//   console.log(response);
-// });
+export const getDelayedTasks = createAsyncThunk("Tasks/getTasks", async () => {
+  const response = await axios.get(`${baseUrl}/getaDelayedTasks`, {
+    headers: { token: localStorage.getItem("token") },
+  });
+  return response.data.tasksDelayed;
+});
 
 export let tasksSlice = createSlice({
   name: "Tasks",
   initialState: {
     tasks: [],
+    delayed: [],
+    loading: false,
+  },
+  reducers: {
+    isLoading(state) {
+      state.loading = true;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(addTask.fulfilled, (state, action) => {
       state.addTask = action.payload;
     });
-    // builder.addCase(updateTask.fulfilled, (state, action) => {
-    //   state.updateTask = action.payload;
-    // });
-    // builder.addCase(deleteTask.fulfilled, (state, action) => {
-    //   state.deleteTask = action.payload;
-    // });
-    builder.addCase(getAllTasks.fulfilled, (state, action) => {
-      state.getAllTasks = action.payload;
+    builder.addCase(updateTask.fulfilled, (state, action) => {
+      state.updateTask = action.payload;
     });
-    // builder.addCase(getDelayedTasks.fulfilled, (state, action) => {
-    //   state.getDelayedTasks = action.payload;
-    //   console.log(action.payload);
-    // });
+    builder.addCase(deleteTask.fulfilled, (state, action) => {
+      state.deleteTask = action.payload;
+    });
+    builder.addCase(getAllTasks.fulfilled, (state, action) => {
+      state.loading = true;
+      state.tasks = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getDelayedTasks.fulfilled, (state, action) => {
+      state.loading = true;
+      state.delayed = action.payload;
+      state.loading = false;
+    });
   },
 });
 
 export let taskReducer = tasksSlice.reducer;
+export let { isLoading } = tasksSlice.actions;
