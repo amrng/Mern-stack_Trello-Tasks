@@ -5,4 +5,23 @@
 
 body {
   background-color: var(--background-color);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(10, 86, 117);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--main-text-color);
 }

@@ -1,0 +1,15 @@
+.network {
+    z-index: 9999 !important;
+    color: white !important;
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    height: 25vh;
+    background-color: rgb(6, 35, 46);
+    border-radius: 25px;
+    box-shadow: 0px 0px 20px 4px rgb(245, 158, 11);
+}
+
+.load {
+    scale: 6;
+}
