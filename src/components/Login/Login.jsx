@@ -69,7 +69,7 @@ export default function Login() {
 
 	function continueGoogle() {
 		window.open(
-			'https://trello-application.onrender.com/auth/google/callback',
+			'https://trello-application.onrender.com/google/callback',
 			'_self'
 		);
 	}
@@ -158,7 +158,7 @@ export default function Login() {
 												<GoogleButton
 													type="dark"
 													onClick={continueGoogle}
-													scope="openid profile email"
+													scope="profile email"
 												/>
 											</div>
 											<p className="text-center  mt-5 mb-0 text-white">
