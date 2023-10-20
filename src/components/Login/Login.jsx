@@ -69,7 +69,7 @@ export default function Login() {
 
 	function continueGoogle() {
 		window.open(
-			'https://trello-application.onrender.com/google/callback',
+			'https://trello-application.onrender.com/auth/google/callback',
 			'_self'
 		);
 	}
