@@ -114,7 +114,7 @@ export default function DeleteAccount() {
 					<div className="container h-50">
 						<div className="row d-flex justify-content-center align-items-center h-100">
 							<div className="col-12 col-md-10 col-lg-8 col-xl-6">
-								<div className="card mx-auto py-5 bg-info bg-opacity-10 rounded-5">
+								<div className="card mx-auto py- bg-info bg-opacity-10 rounded-5">
 									<div className="card-body p-5">
 										<h5 className=" text-center mb-5 text-white">
 											Before proceeding, please choose whether you want to
@@ -124,7 +124,7 @@ export default function DeleteAccount() {
 										<div className="d-flex justify-content-center">
 											<button
 												onClick={handelOpenPopUpDeactivate}
-												className="btn btn-warning btn-block btn-lg gradient-custom-4 text-body w-75 m-4">
+												className="btn btn-outline-warning btn-block btn-lg gradient-custom-4 text-body w-75 m-4">
 												Deactivate account
 											</button>
 										</div>
@@ -158,7 +158,7 @@ export default function DeleteAccount() {
 										<div className="d-flex justify-content-center ">
 											<button
 												onClick={handelOpenPopUpDelet}
-												className="btn btn-danger btn-block btn-lg gradient-custom-4 text-body w-75 m-4">
+												className="btn btn-outline-danger btn-block btn-lg gradient-custom-4 text-body w-75 m-4">
 												Delete account
 											</button>
 										</div>

@@ -75,7 +75,7 @@ export default function ChangePassword() {
 						<div className="row d-flex justify-content-center align-items-center h-100">
 							<div className="col-12 col-md-10 col-lg-8 col-xl-6">
 								<div className="card mx-auto py-5 bg-info bg-opacity-10 rounded-5">
-									<div className="card-body p-5">
+									<div className="card-body p-">
 										<h2 className=" text-center mb-5 text-white">
 											Change your password
 										</h2>
@@ -134,7 +134,7 @@ export default function ChangePassword() {
 											<div className="d-flex justify-content-center">
 												<button
 													type="submit"
-													className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+													className="btn btn-outline-info btn-block btn-lg gradient-custom-4 text-body">
 													{isLoading ? (
 														<i className="fa fa-spin fa-spinner"></i>
 													) : (

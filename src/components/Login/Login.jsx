@@ -155,7 +155,11 @@ export default function Login() {
 												</button>
 											</div>
 											<div className="d-flex justify-content-center mt-4">
-												<GoogleButton type="dark" onClick={continueGoogle} />
+												<GoogleButton
+													type="dark"
+													onClick={continueGoogle}
+													scope="openid profile email"
+												/>
 											</div>
 											<p className="text-center  mt-5 mb-0 text-white">
 												Dont have an account?
