@@ -146,7 +146,7 @@ export default function Login() {
 											<div className="d-flex justify-content-center">
 												<button
 													type="submit"
-													className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
+													className="btn btn-outline-info btn-block btn-lg gradient-custom-4 text-body">
 													{isLoading ? (
 														<i className="fa fa-spin fa-spinner"></i>
 													) : (
