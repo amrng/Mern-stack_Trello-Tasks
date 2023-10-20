@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useMutation } from 'react-query';
+
 // import style from './Login.css';
 import * as Yup from 'yup';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -11,6 +13,7 @@ export default function Login() {
 	const [isLoading, setIsLoading] = useState();
 	const [apiErrors, setApiErrors] = useState();
 	const location = useLocation();
+	// const queryClient = useQueryClient();
 	let navigate = useNavigate();
 	let { setToken } = useContext(TokenContext);
 
@@ -26,24 +29,6 @@ export default function Login() {
 				'Password should start with Capital letter and contain numbers'
 			),
 	});
-
-	function login(values) {
-		setIsLoading(true);
-		axios
-			.post('https://trello-application.onrender.com/signin', values)
-			.then((data) => {
-				if (data.data.message === 'Successfully signed in, Welcome back') {
-					setIsLoading(false);
-					localStorage.setItem('token', data.data.token);
-					setToken(data.data.token);
-					navigate('/tasks');
-				}
-			})
-			.catch((err) => {
-				setApiErrors(err.response.data.message);
-				setIsLoading(false);
-			});
-	}
 	let formik = useFormik({
 		initialValues: {
 			email: '',
@@ -51,12 +36,42 @@ export default function Login() {
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
-			login(values);
+			loginMutation.mutate(values);
 		},
 	});
 
+	const loginMutation = useMutation(
+		(values) => {
+			setIsLoading(true);
+			return axios.post(
+				'https://trello-application.onrender.com/signin',
+				values
+			);
+		},
+		{
+			onSuccess: (data) => {
+				if (data.data.message === 'Successfully signed in, Welcome back') {
+					setIsLoading(false);
+					localStorage.setItem('token', data.data.token);
+					setToken(data.data.token);
+					// queryClient.invalidateQueries('/tasks');
+					navigate('/');
+				}
+			},
+			onError: (err) => {
+				setIsLoading(false);
+				setApiErrors(err.response.data.message);
+
+				formik.setFieldError('password', err.response.data.message);
+			},
+		}
+	);
+
 	function continueGoogle() {
-		window.open('https://trello-application.onrender.com/auth/google', '_self');
+		window.open(
+			'https://trello-application.onrender.com/auth/google/callback',
+			'_self'
+		);
 	}
 
 	useEffect(() => {
