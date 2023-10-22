@@ -11,7 +11,7 @@ export default function AllTasks() {
 	useEffect(() => {
 		dispatch(isLoading());
 		dispatch(getAllTasks());
-	}, [dispatch]);
+	});
 
 	function details(id) {
 		return navigate(`/tasks/update/${id}`);
