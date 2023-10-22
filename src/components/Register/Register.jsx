@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+import GoogleSignin from '../Login/GoogleSignin';
 
 export default function Register() {
 	const [isLoading, setisloading] = useState(false);
@@ -195,6 +196,9 @@ export default function Register() {
 													)}
 													Register
 												</button>
+											</div>
+											<div className="d-flex justify-content-center mt-4">
+												<GoogleSignin />
 											</div>
 											<p className="text-center text-color mt-5 mb-0">
 												Have already an account?{' '}

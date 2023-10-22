@@ -34,13 +34,12 @@ export default function DeleteAccount() {
 				`https://trello-application.onrender.com/user/deleteUser/${
 					jwtDecode(localStorage.getItem('token')).id
 				}`,
-				undefined,
 				{
 					headers: { token: localStorage.getItem('token') },
 				}
 			)
+
 			.then((data) => {
-				console.log(data);
 				toast.success(data.data.message, {
 					duration: 6000,
 					position: 'bottom-right',
@@ -55,7 +54,6 @@ export default function DeleteAccount() {
 				closeDeletePopUp();
 			})
 			.catch((err) => {
-				console.log(err);
 				toast.error(err.response.data.message, {
 					duration: 6000,
 					position: 'bottom-right',

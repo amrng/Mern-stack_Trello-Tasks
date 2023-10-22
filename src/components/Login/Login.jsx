@@ -1,18 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useMutation } from 'react-query';
 
 // import style from './Login.css';
 import * as Yup from 'yup';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TokenContext } from '../../Context/token';
 import axios from 'axios';
 import { useFormik } from 'formik';
-import GoogleButton from 'react-google-button';
+import GoogleSignin from './GoogleSignin';
 
 export default function Login() {
 	const [isLoading, setIsLoading] = useState();
 	const [apiErrors, setApiErrors] = useState();
-	const location = useLocation();
 	// const queryClient = useQueryClient();
 	let navigate = useNavigate();
 	let { setToken } = useContext(TokenContext);
@@ -66,24 +65,6 @@ export default function Login() {
 			},
 		}
 	);
-
-	function continueGoogle() {
-		window.open(
-			'https://trello-application.onrender.com/google/callback',
-			'_self'
-		);
-	}
-
-	useEffect(() => {
-		const searchParams = new URLSearchParams(location.search);
-		const token = searchParams.get('token');
-		console.log('Received token:', token);
-		if (token) {
-			localStorage.setItem('token', token); // Store the token in local storage
-			setToken(token); // Set the token in your TokenContext or state if needed
-			navigate('/tasks', { replace: true }); // Navigate to the '/tasks' route
-		}
-	}, [location.search, navigate, setToken]);
 
 	return (
 		<>
@@ -155,11 +136,7 @@ export default function Login() {
 												</button>
 											</div>
 											<div className="d-flex justify-content-center mt-4">
-												<GoogleButton
-													type="dark"
-													onClick={continueGoogle}
-													scope="profile "
-												/>
+												<GoogleSignin />
 											</div>
 											<p className="text-center  mt-5 mb-0 text-white">
 												Dont have an account?
@@ -180,3 +157,18 @@ export default function Login() {
 		</>
 	);
 }
+
+// function continueGoogle() {
+// 	window.open('https://trello-application.onrender.com/google', '_self');
+// }
+
+// useEffect(() => {
+// 	const searchParams = new URLSearchParams(location.search);
+// 	const token = searchParams.get('token');
+// 	console.log('Received token:', token);
+// 	if (token) {
+// 		localStorage.setItem('token', token); // Store the token in local storage
+// 		setToken(token); // Set the token in your TokenContext or state if needed
+// 		navigate('/tasks', { replace: true }); // Navigate to the '/tasks' route
+// 	}
+// }, [location.search, navigate, setToken]);
